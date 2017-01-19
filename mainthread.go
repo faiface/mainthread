@@ -2,7 +2,6 @@ package mainthread
 
 import (
 	"errors"
-	"os"
 	"runtime"
 )
 
@@ -44,7 +43,7 @@ func Run(run func()) {
 		case f := <-callQueue:
 			f()
 		case <-done:
-			os.Exit(0)
+			return
 		}
 	}
 }
