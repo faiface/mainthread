@@ -4,8 +4,8 @@ Package mainthread allows you to run code on the main operating system thread.
 
 `go get github.com/faiface/mainthread`
 
-Operating systems often require that, code which deals with windows and graphics has to run on the
-main thread. This is however somehow challenging in Go due it Go's concurrent nature.
+Operating systems often require, that code which deals with windows and graphics has to run on the
+main thread. This is however somehow challenging in Go due to Go's concurrent nature.
 
 This package makes it easily possible.
 
