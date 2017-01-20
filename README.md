@@ -22,11 +22,11 @@ import (
 )
 
 func run() {
-        // now we can run stuff on the main thread like this
-        mainthread.Call(func() {
-                fmt.Println("printing from the main thread")
-        })
-        fmt.Println("printing from another thread")
+	// now we can run stuff on the main thread like this
+	mainthread.Call(func() {
+		fmt.Println("printing from the main thread")
+	})
+	fmt.Println("printing from another thread")
 }
 
 func main() {
