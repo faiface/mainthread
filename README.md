@@ -30,7 +30,7 @@ func run() {
 }
 
 func main() {
-        mainthread.Run(run) // enables mainthread package and runs run in a separate goroutine
+	mainthread.Run(run) // enables mainthread package and runs run in a separate goroutine
 }
 ```
 
