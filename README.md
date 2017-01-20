@@ -36,7 +36,7 @@ func main() {
 
 ## More functions
 
-If you don't wish to wait until the function finishes running on the main thread, use
+If you don't wish to wait until a function finishes running on the main thread, use
 `mainthread.CallNonBlock`:
 
 ```go
