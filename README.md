@@ -41,7 +41,7 @@ If you don't wish to wait until a function finishes running on the main thread, 
 
 ```go
 mainthread.CallNonBlock(func() {
-        fmt.Println("i'm in the main thread")
+	fmt.Println("i'm in the main thread")
 })
 fmt.Println("but imma be likely printed first, cuz i don't wait")
 ```
@@ -51,10 +51,10 @@ If you want to get some value returned from the main thread, you can use `mainth
 
 ```go
 err := mainthread.CallErr(func() error {
-        return nil // i don't do nothing wrong
+	return nil // i don't do nothing wrong
 })
 val := mainthread.CallVal(func() interface{} {
-        return 42 // the meaning of life, universe and everything
+	return 42 // the meaning of life, universe and everything
 })
 ```
 
@@ -64,7 +64,7 @@ variables from within the main thread:
 ```go
 var x, y int
 mainthread.Call(func() {
-        x, y = 1, 2
+	x, y = 1, 2
 })
 ```
 
