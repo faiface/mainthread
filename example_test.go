@@ -8,12 +8,11 @@ import (
 
 func run() {
 	mainthread.Call(func() {
-		// this function will be called on the main thread
-		fmt.Println("Hello, world!")
+		fmt.Println("i'm printing from the main thread")
 	})
 }
 
 func ExampleRun() {
 	mainthread.Run(run)
-	// Output: Hello, world!
+	// Output: i'm printing from the main thread
 }
