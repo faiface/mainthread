@@ -58,7 +58,7 @@ val := mainthread.CallVal(func() interface{} {
 })
 ```
 
-If `mainthread.CallErr` or `mainthread.CallVall` aren't sufficient for you, you can just assign
+If `mainthread.CallErr` or `mainthread.CallVal` aren't sufficient for you, you can just assign
 variables from within the main thread:
 
 ```go
