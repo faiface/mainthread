@@ -28,6 +28,8 @@ func checkRun() {
 
 // Run enables mainthread package functionality. To use mainthread package, put your main function
 // code into the run function (the argument to Run) and simply call Run from the real main function.
+//
+// Run returns when run (argument) function finishes.
 func Run(run func()) {
 	callQueue = make(chan func(), CallQueueCap)
 	respChan = make(chan interface{})
