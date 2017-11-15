@@ -13,7 +13,6 @@ var CallQueueCap = 16
 
 var (
 	callQueue chan func()
-	respChan  chan interface{}
 )
 
 func init() {
@@ -32,7 +31,6 @@ func checkRun() {
 // Run returns when run (argument) function finishes.
 func Run(run func()) {
 	callQueue = make(chan func(), CallQueueCap)
-	respChan = make(chan interface{})
 
 	done := make(chan struct{})
 	go func() {
@@ -60,29 +58,28 @@ func CallNonBlock(f func()) {
 // Call queues function f on the main thread and blocks until the function f finishes.
 func Call(f func()) {
 	checkRun()
+	done := make(chan struct{})
 	callQueue <- func() {
 		f()
-		respChan <- struct{}{}
+		done <- struct{}{}
 	}
-	<-respChan
+	<-done
 }
 
 // CallErr queues function f on the main thread and returns an error returned by f.
 func CallErr(f func() error) error {
 	checkRun()
+	errChan := make(chan error)
 	callQueue <- func() {
-		respChan <- f()
+		errChan <- f()
 	}
-	err := <-respChan
-	if err != nil {
-		return err.(error)
-	}
-	return nil
+	return <-errChan
 }
 
 // CallVal queues function f on the main thread and returns a value returned by f.
 func CallVal(f func() interface{}) interface{} {
 	checkRun()
+	respChan := make(chan interface{})
 	callQueue <- func() {
 		respChan <- f()
 	}
