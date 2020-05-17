@@ -25,10 +25,12 @@ func checkRun() {
 	}
 }
 
-// Run enables mainthread package functionality. To use mainthread package, put your main function
-// code into the run function (the argument to Run) and simply call Run from the real main function.
+// Run enables mainthread package functionality. To use the mainthread package,
+// put your main function code into the run function (the argument to Run) and
+// simply call Run from the real main function.
 //
-// Run returns when run (argument) function finishes.
+// Run returns when run (argument) function finishes. To use a function that
+// returns an error you can alternatively use the RunE function.
 func Run(run func()) {
 	callQueue = make(chan func(), CallQueueCap)
 
@@ -44,6 +46,30 @@ func Run(run func()) {
 			f()
 		case <-done:
 			return
+		}
+	}
+}
+
+// RunE is an alternative to the Run(…) function which accepts a function that
+// may return an error. You can either use the Run or RunE function but not both.
+//
+// RunE returns when run (argument) function finishes. To use a function that
+// does not return an error you can alternatively use the Run function.
+func RunE(run func() error) error {
+	callQueue = make(chan func(), CallQueueCap)
+
+	done := make(chan error)
+	go func() {
+		err := run()
+		done <- err
+	}()
+
+	for {
+		select {
+		case f := <-callQueue:
+			f()
+		case err := <-done:
+			return err
 		}
 	}
 }
