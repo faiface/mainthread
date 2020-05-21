@@ -16,7 +16,7 @@ func TestRunE(t *testing.T) {
 		return errors.New("this is a test")
 	}
 
-	err := mainthread.RunE(fun)
+	err := mainthread.RunErr(fun)
 	if err == nil || err.Error() != "this is a test" {
 		t.Errorf("Did not receive expected error but %+v", err)
 	}
@@ -44,7 +44,7 @@ func BenchmarkCallErr(b *testing.B) {
 		}
 		b.ResetTimer()
 		for i := 0; i < b.N; i++ {
-			mainthread.CallErr(f)
+			_ = mainthread.CallErr(f)
 		}
 	}
 	mainthread.Run(run)
