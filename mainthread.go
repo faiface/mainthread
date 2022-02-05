@@ -11,16 +11,14 @@ import (
 // The default value is 16 and should be good for 99% usecases.
 var CallQueueCap = 16
 
-var (
-	callQueue chan func()
-)
+var callQueue chan func()
 
 func init() {
 	runtime.LockOSThread()
 }
 
 func checkRun() {
-	if callQueue == nil {
+	if !IsRunning() {
 		panic(errors.New("mainthread: did not call Run"))
 	}
 }
@@ -46,6 +44,12 @@ func Run(run func()) {
 			return
 		}
 	}
+}
+
+// IsRunning returns true if the Run function has already
+// been called and is running.
+func IsRunning() bool {
+	return callQueue != nil
 }
 
 // CallNonBlock queues function f on the main thread and returns immediately. Does not wait until f
