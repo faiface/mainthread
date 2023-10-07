@@ -1,3 +1,7 @@
+# \*\*\*\*\*NOTICE\*\*\*\*\* 
+
+This repo is not under active development anymore and has been archived. Continued development has been migrated to [gopxl/mainthread](https://github.com/gopxl/mainthread). A big thank you to [faiface](https://github.com/faiface) for creating this awesome library and for all the hard work put into it. We encourage old and new users to check out the new repo and contribute to it.
+
 # mainthread [![GoDoc](https://godoc.org/github.com/faiface/mainthread?status.svg)](http://godoc.org/github.com/faiface/mainthread) [![Report card](https://goreportcard.com/badge/github.com/faiface/mainthread)](https://goreportcard.com/report/github.com/faiface/mainthread)
 
 Package mainthread allows you to run code on the main operating system thread.
